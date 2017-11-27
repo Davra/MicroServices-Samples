@@ -88,15 +88,21 @@ app.get('/random', function (req, res) {
 
 
 // Retrieve data from Connecthing timeseries DB
+// Optionally put ?device=123 in the url when makeing the GET request
 app.get('/localdata', function (req, res) {
     console.log('Request made for local data');
+    var uuidToGet = "660d5a82-64ce-44a4-b201-add9a6029a24";
+    if(req.query.device != undefined) {
+        console.log('A particular device was specified in the params: ', req.query.device);
+        uuidToGet = req.query.device;
+    }
     var copyOfRes = res;
     var queryForDb = {
         "metrics": [
             {
                 "name": "43040_100",
                 "tags": {
-                    "UUID": "660d5a82-64ce-44a4-b201-add9a6029a24"
+                    "UUID": uuidToGet,
                 }
             }
         ],
@@ -117,7 +123,6 @@ app.get('/localdata', function (req, res) {
     });
 
 });
-
 
 
 // Retrieve remote data from elsewhere
