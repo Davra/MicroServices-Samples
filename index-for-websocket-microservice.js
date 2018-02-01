@@ -3,6 +3,30 @@
 const express = require('express')
 const http = require("http");
 const app = express()
+
+/*
+NOTE!
+You will need to add the ws library to your package.json!!!!
+it should look like this:
+{
+  "name": "microservice",
+  "version": "1.0.0",
+  "description": "connecthing.io microservice",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js 2>&1",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "connecthing.io",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.4",
+    "@connecthing.io/connecthing-api": "~1.0.2",
+    "ws": "^1.1.0"
+  }
+}
+
+*/
 const WebSocketServer = require('ws').Server;
 const WebSocket = require("ws");
 
