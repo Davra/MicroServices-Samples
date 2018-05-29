@@ -114,6 +114,9 @@ app.get('/localdata', function (req, res) {
     api.request({
         url: "http://api.connecthing/api/v1/timeseriesData",
         contentType: "application/json",
+        headers: {
+          'Content-Type': 'application/json'
+	},	    
         body: JSON.stringify(queryForDb),
         method: "POST",
         callback: function(err, response, body){
