@@ -31,7 +31,7 @@ var simplePutDataIntoTimeSeriesDb = function(deviceUuid, metricName, metricValue
         method: "PUT",
         callback: function(err, response, body){
             if(callback) {
-                callback(err, response, body);
+                callback(err, response);
             }
         }
     });
@@ -46,7 +46,7 @@ app.get('/insertdata', function (req, res) {
         if(err !== undefined && err !== null) {
             copyOfRes.send('Request made to insert data into DB finished. response was ' + responseFromServer.statusCode);
         } else {
-            console.log('Request made to insert data into DB finished. ERROR was encountered ', err, body);
+            console.log('Request made to insert data into DB finished. ERROR was encountered ', err);
             copyOfRes.send('Request made to insert data into DB finished. ERROR was encountered');
         }
     });
