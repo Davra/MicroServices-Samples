@@ -43,7 +43,7 @@ app.get('/insertdata', function (req, res) {
     console.log('Request made to insert data into DB');
     var copyOfRes = res;
     simplePutDataIntoTimeSeriesDb('e1082ec8-4881-4017-8ce3-ff937c09f6c0', '43040_100', 15, function(err, responseFromServer) {
-        if(err !== undefined && err !== null) {
+        if(err === undefined && err === null) {
             copyOfRes.send('Request made to insert data into DB finished. response was ' + responseFromServer.statusCode);
         } else {
             console.log('Request made to insert data into DB finished. ERROR was encountered ', err);
