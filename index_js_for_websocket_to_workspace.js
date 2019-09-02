@@ -64,8 +64,13 @@ Here is sample code you can paste into a custom Widget Template
             return ws;
         }
     
-        //CHANGE THE NAME OF THE MICROSERVICE HERE
-        var ws = createWebSocket("/microservices/test-1150802776948"); 
+        //CHANGE THE NAME OF THE WORKSPACE UUID HERE
+	//YOU GET THIS UUID BY OPENING THE WORKSPACE IDE
+	//PRESSING F12 AND IN THE CONSOLE TYPE THE FOLLOWING:
+	//document.workspace.UUID
+	//TAKE THE VALUE OF THE WORKSPACE UUID AND REPLACE THE
+	//TEXT <uuid of your workspace> WITH IT
+        var ws = createWebSocket("/api/v1/microservices/workspaces/<uuid of your workspace>"); 
     
         ws.onerror = function(e){
       		console.error("Error", e);
