@@ -38,7 +38,7 @@ app.get('/', function (req, res) {
 /*
 The following code creates a websocket endpoint in your microservice. To open
 a websocket from a custom widget your websocket URL would look like:
-ws://[my-domain].connecthing.io/microservices/[microservice name]
+ws://[my-domain].davra.com/api/v1/microservices/workspaces/[workspace uuid]/proxy
 
 Here is sample code you can paste into a custom Widget Template
 
