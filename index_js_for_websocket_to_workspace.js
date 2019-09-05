@@ -70,7 +70,7 @@ Here is sample code you can paste into a custom Widget Template
 	//document.workspace.UUID
 	//TAKE THE VALUE OF THE WORKSPACE UUID AND REPLACE THE
 	//TEXT <uuid of your workspace> WITH IT
-        var ws = createWebSocket("/api/v1/microservices/workspaces/<uuid of your workspace>"); 
+        var ws = createWebSocket("/api/v1/microservices/workspaces/<uuid of your workspace>/proxy/"); 
     
         ws.onerror = function(e){
       		console.error("Error", e);
