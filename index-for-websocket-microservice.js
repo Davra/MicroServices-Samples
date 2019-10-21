@@ -22,7 +22,7 @@ it should look like this:
   "dependencies": {
     "express": "^4.15.4",
     "@connecthing.io/connecthing-api": "~1.0.2",
-    "ws": "^1.1.0"
+    "ws": "^7.2.0"
   }
 }
 
