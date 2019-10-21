@@ -94,9 +94,9 @@ Here is sample code you can paste into a custom Widget Template
 
 var server = http.createServer(app);
 var wss = new WebSocketServer({ server: server });
-wss.on('connection', function connection(ws) {
+wss.on('connection', function connection(ws, req) {
     
-    console.log("Websocket opened: " + ws.upgradeReq.url);
+    console.log("Websocket opened: " + req.url);
     var timer = setInterval(function(){
         try{
             if(ws.readyState == WebSocket.OPEN){
