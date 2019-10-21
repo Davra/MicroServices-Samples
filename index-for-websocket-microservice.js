@@ -64,8 +64,17 @@ Here is sample code you can paste into a custom Widget Template
             return ws;
         }
     
-        //CHANGE THE NAME OF THE MICROSERVICE HERE
-        var ws = createWebSocket("/microservices/test-1150802776948"); 
+        //IF YOU ARE RUNNING YOUR MICROSERVICE IN PRODUCTION THEN
+	//UNCOMMENT THE NEXT LINE AND SET THE NAME OF THE MICROSERVICE
+        //var ws = createWebSocket("/microservices/<THE NAME OF YOUR MICROSERVICE>"); 
+	
+	//IF YOU ARE RUNNING YOUR MICROSERVICE IN YOUR WORKSPACE THEN
+	//UNCOMMENT THE FOLLOWING LINE AND REPLACE <UUID OR YOUR WORKSPACE>
+	//WITH THE UUID OF YOUR WORKSPACE. YOU CAN GET THIS FROM THE HTTP CLIENT TAB
+	//IN THE MICROSERVICE IDE
+        //var ws = createWebSocket("/api/v1/microservices/workspaces/<UUID OR YOUR WORKSPACE>/proxy/"); 
+    
+
     
         ws.onerror = function(e){
       		console.error("Error", e);
