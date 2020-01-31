@@ -81,7 +81,7 @@ Here is sample code you can paste into a custom Widget Template
     	};
     
         ws.onmessage = function(e){
-            console.dir(e);
+            $(document.body).html("Message: " + e.data.toString());
         }
 
     </script>
