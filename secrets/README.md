@@ -64,3 +64,11 @@ The response filed will show your oiginal message:
 }
 ```
 
+## Now for production
+So we're happy that we can do the encryption/decryption from the workspace. We now need to build the microservice and then mount the secret to the production container:
+- Commit and push your code to the git repo
+- Open the build tab and click Build
+- Mount secret to the production microservice:
+```
+curl -u "username:password" -X PATCH -d '{"config.secrets": [{"secretUUID": "<the UUID of the secret just created>", "mountPath": "/etc/secrets/my-aes-key"}]}' -H "content-type: application/json" https://demo.davra.com/api/v1/serviceadmin/<UUID of your microservice>
+```
