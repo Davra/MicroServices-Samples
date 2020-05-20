@@ -1,16 +1,17 @@
 // See your keys here: https://dashboard.stripe.com/account/apikeys
+
 const keyPublishable = 'pk_test_XXXXX'; // Enter the key here
 const keySecret = 'sk_test_XXXXX'; // enter the secret here
-
 const davraToken = 'XXXXX';
 
-var request = require('request');
-var api = require("@connecthing.io/connecthing-api");
 
+const request = require('request');
+const api = require("@connecthing.io/connecthing-api");
 const express = require('express');
 const app = express();
-
 const bodyParser = require('body-parser');
+
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 

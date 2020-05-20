@@ -1,18 +1,20 @@
 const express = require('express');
 const kafka = require('kafka-node');
-var api = require("@connecthing.io/connecthing-api"); // Required for local API calls
 const fs = require("fs");
-
 const app = express();
+const api = require("@connecthing.io/connecthing-api"); // Required for local API calls
+
 
 app.get('/', function (req, res) {
-  res.send('connecthing.io node microservice!');
+    res.send('Davra node microservice!');
 });
 
 const SERVER_PORT = 8080;
 app.listen(SERVER_PORT, function () {
-  console.log('connecthing.io node microservice listening on port ' + SERVER_PORT + '!');
+    console.log('Davra node microservice listening on port ' + SERVER_PORT + '!');
 });
+
+
 
 const ConsumerGroup = kafka.ConsumerGroup;
 const consumer = new ConsumerGroup({

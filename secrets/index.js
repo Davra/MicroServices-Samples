@@ -1,12 +1,13 @@
 const crypto = require("crypto");
 const express = require('express');
 const fs = require("fs");
-
 const app = express();
 
+
 app.get('/', function (req, res) {
-  res.send('davra.com node microservice!');
+    res.send('davra.com node microservice!');
 });
+
 
 app.post("/encrypt", (req, res) => {
     let text = "";
