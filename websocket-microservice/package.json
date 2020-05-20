@@ -1,13 +1,13 @@
 {
   "name": "microservice",
   "version": "1.0.0",
-  "description": "connecthing.io microservice",
+  "description": "Davra sample microservice",
   "main": "index.js",
   "scripts": {
     "start": "node index.js 2>&1",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "connecthing.io",
+  "author": "davra.com",
   "license": "ISC",
   "dependencies": {
     "express": "^4.15.4",

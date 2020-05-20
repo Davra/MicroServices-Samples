@@ -9,7 +9,7 @@ const WebSocket = require("ws");
 const app = express();
 
 app.get('/', function (req, res) {
-  res.send('connecthing.io node microservice!');
+  res.send('Davra node microservice!');
 });
 
 
