@@ -8,21 +8,22 @@
 
 const express = require('express');
 const app = express();
-var fs = require('fs');
-var api = require("@connecthing.io/connecthing-api"); // Required for local API calls
-var request = require('request');
-var http = require("http");
-var https = require("https");
+const fs = require('fs');
+const api = require("@connecthing.io/connecthing-api"); // Required for local API calls
+const request = require('request');
+const http = require("http");
+const https = require("https");
 
 // An example of microservice responding to incoming HTTP requests (GET)
 // You can test this by clicking the "Send" button on your far right of the code editor
 app.get('/', function (req, res) {
-  res.send('connecthing.io node microservice here!');
-  console.log('Http call seen arriving at this microservice');
+    res.send('Davra node microservice here!');
+    console.log('Http call seen arriving at this microservice');
 });
+
 app.get('/test', function (req, res) {
-  res.send('connecthing.io node microservice at /test ');
-  console.log('Http call seen arriving at this microservice /test : ', req);
+    res.send('Davra node microservice at /test ');
+    console.log('Http call seen arriving at this microservice /test : ', req);
 });
 
 
@@ -31,10 +32,10 @@ setInterval(function() {
     console.log('microservice running. Timestamp is:' + new Date());
     // Example of making an API call to another microservice inside Connecthing
     api.request({
-      url: "http://api.connecthing/api/v1/devices",
-      callback: function(err, response, body){
-        console.log('Http call was made to /api/v1/devices and got back: ', body);
-      }
+        url: "http://api.connecthing/api/v1/devices",
+        callback: function(err, response, body){
+            console.log('Http call was made to /api/v1/devices and got back: ', body);
+        }
     });
 }, 30000);
 
@@ -50,7 +51,7 @@ setInterval(function() {
 // Set the microservice running and listening for incoming HTTP requests
 const SERVER_PORT = 8080;
 app.listen(SERVER_PORT, function () {
-  console.log('connecthing.io node microservice listening on port ' + SERVER_PORT);
+    console.log('Davra node microservice listening on port ' + SERVER_PORT);
 });
 
 

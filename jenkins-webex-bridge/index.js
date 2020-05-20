@@ -1,10 +1,10 @@
 // Watch for incoming calls from Jenkins and make calls to webex
 // to insert messages into appropriate webex spaces
 //
-var api = require("@connecthing.io/connecthing-api"); // Required for local API calls
-var request = require('request');
-var http = require("http");
-var https = require("https");
+const api = require("@connecthing.io/connecthing-api"); // Required for local API calls
+const request = require('request');
+const http = require("http");
+const https = require("https");
 const express = require('express');
 const app = express();
 
@@ -18,8 +18,6 @@ var roomId = 'XXXXXXXXXXXXXXX';
 console.log('Jenkins Webex bridge has started');
 
 app.post('/', function (req, res) {
-    
-
     var bodyStr = '';
     req.on("data",function(chunk){
         bodyStr += chunk.toString();
@@ -29,7 +27,7 @@ app.post('/', function (req, res) {
         res.send('thanks, bridge has received the call ');
         console.log('Making call to webex for ', body2);
         var myStatus = (bodyStr.indexOf('failure') > -1) ? 'FAIL' : 'success';
-        var dataToSend = {
+        const dataToSend = {
             "roomId":   roomId,
             "text": myStatus + " Jenkins build: " + body2
         };
@@ -57,5 +55,5 @@ app.post('/', function (req, res) {
 // Set the microservice running and listening for incoming HTTP requests
 const SERVER_PORT = 8080;
 app.listen(SERVER_PORT, function () {
-  console.log('connecthing.io node microservice listening on port ' + SERVER_PORT);
+    console.log('Davra node microservice listening on port ' + SERVER_PORT);
 });

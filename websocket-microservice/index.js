@@ -3,36 +3,12 @@
 const express = require('express')
 const http = require("http");
 const app = express()
-
-/*
-NOTE!
-You will need to add the ws library to your package.json!!!!
-it should look like this:
-{
-  "name": "microservice",
-  "version": "1.0.0",
-  "description": "connecthing.io microservice",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js 2>&1",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "connecthing.io",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^4.15.4",
-    "@connecthing.io/connecthing-api": "~1.0.2",
-    "ws": "^7.2.0"
-  }
-}
-
-*/
 const WebSocketServer = require('ws').Server;
 const WebSocket = require("ws");
 
 
 app.get('/', function (req, res) {
-  res.send('connecthing.io node microservice!')
+    res.send('Davra node microservice!')
 })
 
 /*
@@ -65,24 +41,22 @@ Here is sample code you can paste into a custom Widget Template
         }
     
         //IF YOU ARE RUNNING YOUR MICROSERVICE IN PRODUCTION THEN
-	//UNCOMMENT THE NEXT LINE AND SET THE NAME OF THE MICROSERVICE
+        //UNCOMMENT THE NEXT LINE AND SET THE NAME OF THE MICROSERVICE
         //var ws = createWebSocket("/microservices/<THE NAME OF YOUR MICROSERVICE>"); 
-	
-	//IF YOU ARE RUNNING YOUR MICROSERVICE IN YOUR WORKSPACE THEN
-	//UNCOMMENT THE FOLLOWING LINE AND REPLACE <UUID OR YOUR WORKSPACE>
-	//WITH THE UUID OF YOUR WORKSPACE. YOU CAN GET THIS FROM THE HTTP CLIENT TAB
-	//IN THE MICROSERVICE IDE
+    
+        //IF YOU ARE RUNNING YOUR MICROSERVICE IN YOUR WORKSPACE THEN
+        //UNCOMMENT THE FOLLOWING LINE AND REPLACE <UUID OR YOUR WORKSPACE>
+        //WITH THE UUID OF YOUR WORKSPACE. YOU CAN GET THIS FROM THE HTTP CLIENT TAB
+        //IN THE MICROSERVICE IDE
         //var ws = createWebSocket("/api/v1/microservices/workspaces/<UUID OR YOUR WORKSPACE>/proxy/"); 
     
-
-    
         ws.onerror = function(e){
-      		console.error("Error", e);
-      	};
+            console.error("Error", e);
+        };
 
-      	ws.onclose = function(e){
-	        console.log("Close", e);
-    	};
+        ws.onclose = function(e){
+            console.log("Close", e);
+        };
     
         ws.onmessage = function(e){
             console.dir(e);
@@ -134,5 +108,5 @@ wss.on('connection', function connection(ws, req) {
                         
 const SERVER_PORT = 8080;
 server.listen(SERVER_PORT, function () {
-  console.log('connecthing.io node microservice listening on port ' + SERVER_PORT + '!');
+  console.log('Davra node microservice listening on port ' + SERVER_PORT + '!');
 })

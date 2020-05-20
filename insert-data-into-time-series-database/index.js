@@ -1,16 +1,16 @@
 const express = require('express');
 const app = express();
-var fs = require('fs');
-var api = require("@connecthing.io/connecthing-api"); // Required for local API calls
-var request = require('request');
-var http = require("http");
-var https = require("https");
+const fs = require('fs');
+const api = require("@connecthing.io/connecthing-api"); // Required for local API calls
+const request = require('request');
+const http = require("http");
+const https = require("https");
 
 // An example of microservice responding to incoming HTTP requests (GET)
 // You can test this by clicking the "Send" button on your far right of the code editor
 app.get('/', function (req, res) {
-  res.send('connecthing.io node microservice here!');
-  console.log('Http call seen arriving at this microservice');
+    res.send('Davra node microservice here!');
+    console.log('HTTP call seen arriving at this microservice');
 });
 
 
@@ -45,7 +45,8 @@ app.get('/insertdata', function (req, res) {
     simplePutDataIntoTimeSeriesDb('e1082ec8-4881-4017-8ce3-ff937c09f6c0', '43040_100', 15, function(err, responseFromServer) {
         if(err === undefined || err === null) {
             copyOfRes.send('Request made to insert data into DB finished. response was ' + responseFromServer.statusCode);
-        } else {
+        } 
+        else {
             console.log('Request made to insert data into DB finished. ERROR was encountered ', err);
             copyOfRes.send('Request made to insert data into DB finished. ERROR was encountered');
         }
@@ -53,10 +54,8 @@ app.get('/insertdata', function (req, res) {
 });
 
 
-
-
 // Set the microservice running and listening for incoming HTTP requests
 const SERVER_PORT = 8080;
 app.listen(SERVER_PORT, function () {
-  console.log('connecthing.io node microservice listening on port ' + SERVER_PORT);
+    console.log('Davra node microservice listening on port ' + SERVER_PORT);
 });
