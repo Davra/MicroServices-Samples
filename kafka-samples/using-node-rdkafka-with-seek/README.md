@@ -8,3 +8,6 @@ This goes against the typical Kafka use case where a consumer does not want to m
 It could be used in a scenario where, for example, the service needs to retrieve the very latest data following recovery 
 from a prior failure rather than working through the full history of missed data.
 
+Note that an npm install of node-rdkafka requires the library to be built from scratch which needs a number of dependencies
+in your Docker image.  In Dockerfile you can see we still use node: alpine to keep things lightweight but then install the
+necessary dependencies into the container prior to the npm install.
