@@ -1,4 +1,5 @@
-FROM node:8-alpine
+FROM node:8
+#NOTE: Do not use node:8-alpine here, incompatible with rdkafka
 
 RUN apk --no-cache add \
       bash \
