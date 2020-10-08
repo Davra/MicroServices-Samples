@@ -26,7 +26,8 @@ with similar dev & docker image environments.
 
 * keep the same debian:jessie base
 * Docker image for production similar to dev. environment
-* this means Python 3.4
+* this means **Python 3.4**
+    - Yeah, unfortunately debian:jessie only officially supports python up to 3.4. Technically, you could bypass apt and build a newer version, but that gets messy. Better, longer term solution would be to update to using debian:buster for these images.
 * Flask is installed & used by default
 * Dev environment is set to debug with hot reloading
  
