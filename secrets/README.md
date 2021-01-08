@@ -72,3 +72,12 @@ So we're happy that we can do the encryption/decryption from the workspace. We n
 ```
 curl -u "username:password" -X PATCH -d '{"config.secrets": [{"secretUUID": "<the UUID of the secret just created>", "mountPath": "/etc/secrets/my-aes-key"}]}' -H "content-type: application/json" https://demo.davra.com/api/v1/serviceadmin/<UUID of your microservice>
 ```
+
+## Detach a secret
+If you no-longer wish to use the secret in your workspace you can unmount the secret by clearing the secrets array of your microservice:
+
+```
+curl -u "username:password" -X PATCH -d '{"secrets": []}' -H "content-type: application/json" https://demo.davra.com/api/v1/microservice/workspaces/<UUID of your workspace>
+```
+Note: doing the above will restart your workspace!
+
