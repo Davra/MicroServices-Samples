@@ -2,8 +2,8 @@
 
 ## Broker
 
-To set up a broker a new microservice needs to be created and published.  
-Once published, the API can be used to update its docker image  
+To set up a broker a new microservice needs to be created and deployed.  
+Once deployed, the API can be used to update its docker image  
 For example, to use mosquitto:
 
 ```
