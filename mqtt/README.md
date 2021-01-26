@@ -1,8 +1,11 @@
 # MQTT Microservice sample
 
+To be able to receive MQTT messages in the platform we need to set up two microservices:  
+1. MQTT Broker. This will run an out-of-the-box MQTT broker, e.g. mosquitto. The devices will send messages to this service.
+2. MATT Client. This service will listen for new messages and process them in order to get the data into the platform.
 ## Broker
 
-To set up a broker a new microservice needs to be created and deployed.  
+To set up a broker we need to create a new microservice and deploy it.  
 Once deployed, the API can be used to update its docker image  
 For example, to use mosquitto:
 
