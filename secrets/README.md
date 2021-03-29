@@ -16,7 +16,7 @@ iv=7599D4...
 Create a secret:
 
 ```
-curl -X POST -u <username:password> -d '{"name": "my-encyrption-key", "value": { "key": "74DBDC652910CBC6AEF24EE63C5AE5F64316...", "iv": "7599D4..." }}' https://demo.davra.com/api/v1/secrets
+curl -X POST -u <username:password> -d '{"name": "my-encyrption-key", "value": { "key": "74DBDC652910CBC6AEF24EE63C5AE5F64316...", "iv": "7599D4..." }}' -H "content-type: application/json" https://demo.davra.com/api/v1/secrets
 ```
 This will return a JSON response, within that will be the UUID of the secret you created
 
