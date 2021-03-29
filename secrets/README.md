@@ -4,7 +4,7 @@ This sample demonstrates the use of user-mounted secrets. In this sample we are 
 First we create an AES-256 encryption key:
 
 ```
-openssl enc -nosalt -aes-256-cbc -k my-aes-key -P
+openssl enc -nosalt -aes-256-cbc -k my-encryption-key -P
 ```
 you will get the following output:
 
@@ -22,11 +22,11 @@ This will return a JSON response, within that will be the UUID of the secret you
 
 Now update your workspace to mount the secret:
 ```
-curl -u "username:password" -X PATCH -d '{"secrets": [{"secretUUID": "<the UUID of the secret just created>", "mountPath": "/etc/secrets/my-aes-key"}]}' -H "content-type: application/json" https://demo.davra.com/api/v1/microservices/workspaces/<UUID of your workspace>
+curl -u "username:password" -X PATCH -d '{"secrets": [{"secretUUID": "<the UUID of the secret just created>", "mountPath": "/etc/secrets/my-encryption-key"}]}' -H "content-type: application/json" https://demo.davra.com/api/v1/microservices/workspaces/<UUID of your workspace>
 ```
 Note: doing the above will restart your workspace!
 
-When your workspace comes back up you will find a new directory in your workspace /etc/secrets/my-aes-key with two files contained within called 'key' and 'iv'. This verifies that the secret has been correctly mounted and now you may execute your microservice. 
+When your workspace comes back up you will find a new directory in your workspace /etc/secrets/my-encryption-key with two files contained within called 'key' and 'iv'. This verifies that the secret has been correctly mounted and now you may execute your microservice. 
 
 
 Copy the contents of index.js to your index.js file in your microservice workspace. Open a new terminal and call npm install followed by npm start.
@@ -70,7 +70,7 @@ So we're happy that we can do the encryption/decryption from the workspace. We n
 - Open the build tab and click Build
 - Mount secret to the production microservice:
 ```
-curl -u "username:password" -X PATCH -d '{"config.secrets": [{"secretUUID": "<the UUID of the secret just created>", "mountPath": "/etc/secrets/my-aes-key"}]}' -H "content-type: application/json" https://demo.davra.com/api/v1/serviceadmin/<UUID of your microservice>
+curl -u "username:password" -X PATCH -d '{"config.secrets": [{"secretUUID": "<the UUID of the secret just created>", "mountPath": "/etc/secrets/my-encryption-key"}]}' -H "content-type: application/json" https://demo.davra.com/api/v1/serviceadmin/<UUID of your microservice>
 ```
 
 ## Detach a secret
