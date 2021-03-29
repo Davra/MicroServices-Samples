@@ -21,9 +21,14 @@ curl -X POST -u <username:password> -d '{"name": "my-encyrption-key", "value": {
 This will return a JSON response, within that will be the UUID of the secret you created
 
 Now update your workspace to mount the secret:
+
+You can find your workspace UUID here : 
+![Screenshot 2021-03-29 at 13 54 36](https://user-images.githubusercontent.com/6116581/112832997-01823b80-908e-11eb-9495-e9e142ec3fac.png)
+
 ```
 curl -u "username:password" -X PATCH -d '{"secrets": [{"secretUUID": "<the UUID of the secret just created>", "mountPath": "/etc/secrets/my-encryption-key"}]}' -H "content-type: application/json" https://demo.davra.com/api/v1/microservices/workspaces/<UUID of your workspace>
 ```
+
 Note: doing the above will restart your workspace!
 
 When your workspace comes back up you will find a new directory in your workspace /etc/secrets/my-encryption-key with two files contained within called 'key' and 'iv'. This verifies that the secret has been correctly mounted and now you may execute your microservice. 
