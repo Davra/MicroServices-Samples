@@ -22,7 +22,7 @@ This will return a JSON response, within that will be the UUID of the secret you
 
 Now update your workspace to mount the secret:
 ```
-curl -u "username:password" -X PATCH -d '{"secrets": [{"secretUUID": "<the UUID of the secret just created>", "mountPath": "/etc/secrets/my-aes-key"}]}' -H "content-type: application/json" https://demo.davra.com/api/v1/microservice/workspaces/<UUID of your workspace>
+curl -u "username:password" -X PATCH -d '{"secrets": [{"secretUUID": "<the UUID of the secret just created>", "mountPath": "/etc/secrets/my-aes-key"}]}' -H "content-type: application/json" https://demo.davra.com/api/v1/microservices/workspaces/<UUID of your workspace>
 ```
 Note: doing the above will restart your workspace!
 
@@ -77,7 +77,7 @@ curl -u "username:password" -X PATCH -d '{"config.secrets": [{"secretUUID": "<th
 If you no-longer wish to use the secret in your workspace you can unmount the secret by clearing the secrets array of your microservice:
 
 ```
-curl -u "username:password" -X PATCH -d '{"secrets": []}' -H "content-type: application/json" https://demo.davra.com/api/v1/microservice/workspaces/<UUID of your workspace>
+curl -u "username:password" -X PATCH -d '{"secrets": []}' -H "content-type: application/json" https://demo.davra.com/api/v1/microservices/workspaces/<UUID of your workspace>
 ```
 Note: doing the above will restart your workspace!
 
