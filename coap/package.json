@@ -1,0 +1,16 @@
+{
+    "name": "microservice-coap",
+    "version": "1.0.0",
+    "description": "Davra coap microservice",
+    "main": "index.js",
+    "scripts": {
+        "start": "sh start.sh",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "connecthing.io",
+    "license": "ISC",
+    "dependencies": {
+        "coap": "^0.24.0",
+        "@connecthing.io/connecthing-api": "~1.0.2"
+    }
+}
