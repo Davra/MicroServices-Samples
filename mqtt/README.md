@@ -14,7 +14,7 @@ curl -X PATCH 'http://{TENANT}.davra.com/api/v1/microservices/{MICROSERVICE_UUID
 --header 'Authorization: Bearer {AUTH_TOKEN}' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-    "config.dockerImage": "registry.hub.docker.com/library/eclipse-mosquitto"
+    "config.dockerImage": "registry.hub.docker.com/library/eclipse-mosquitto:1.6"
 }'
 ```
 
