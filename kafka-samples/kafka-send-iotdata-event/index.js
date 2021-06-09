@@ -3,7 +3,7 @@ const kafka = require('kafka-node');
 const fs = require("fs");
 const app = express();
 const api = require("@connecthing.io/connecthing-api"); // Required for local API calls
-
+const METRIC_TO_WATCH = "43040_100";
 
 app.get('/', function (req, res) {
     res.send('Davra node microservice!');
@@ -62,7 +62,7 @@ let lastDatumValue = 1
 
 consumer.on("message", function(message){
     const datum = JSON.parse(message.value)
-    if (datum.name === "eightwest.interestingValue") {
+    if (datum.name === METRIC_TO_WATCH) {
         console.dir(message);
         if (datum.value !== lastDatumValue && (datum.value == 1 || datum.value == 2)) {
             console.log('Value changed to', datum.value, 'from', lastDatumValue)
