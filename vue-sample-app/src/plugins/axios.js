@@ -5,26 +5,36 @@ import VueAxios from 'vue-axios'
 import Vuex from 'vuex'
 
 const {
+    VUE_APP_TENANT_URL: TENANT_URL,
     VUE_APP_PASSWORD: PASSWORD,
     VUE_APP_USERNAME: USERNAME,
-    VUE_APP_TENANT_URL: TENANT_URL
 } = process.env
+
+
+const getAuthorizationHeader = () => {
+    if(process.env.VUE_APP_DAVRA_API_TOKEN) {
+        return `Bearer ${ process.env.VUE_APP_DAVRA_API_TOKEN}`
+    }
+
+    if(PASSWORD && USERNAME) {
+        return 'Basic ' + new Buffer(USERNAME + ':' + PASSWORD).toString('base64')
+    }
+
+
+    return  ""
+}
 
 const axiosInstance = axios.create({
     baseURL: `${TENANT_URL}/api/v1/`,
     headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        Authorization: getAuthorizationHeader()
     }
 })
 const addAuthMethod = function (axiosInstance, method) {
     return function () {
-        const Authorization = 'Basic ' + new Buffer(USERNAME + ':' + PASSWORD).toString('base64')
-
-        console.log(Authorization, 'Authorization')
-
         return axiosInstance[method](...arguments, {
             headers: {
-                Authorization,
                 'content-type': 'application/json'
             }
         })
