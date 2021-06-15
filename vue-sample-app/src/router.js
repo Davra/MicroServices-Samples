@@ -4,8 +4,6 @@ import BaseLayout from './layout/BaseLayout'
 Vue.use(Router)
 
 const router = new Router({
-  mode: 'history',
-  linkExactActiveClass: 'active',
   routes: [
     {
       path: '/',
