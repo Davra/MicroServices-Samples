@@ -2,7 +2,35 @@ const express = require('express');
 const app = express();
 require('dotenv').config();
 const fs = require("fs");
-const { validateMessageData, formatWhatsappNumber } = require('./validation');
+
+// Checks if valid Number is provided
+const isNotPhoneNumber = (phoneNumber) => {
+    if (phoneNumber.trim() == '' || phoneNumber.trim() == 'whatsapp:') return true;
+    else return false;
+};
+  
+const isEmpty = (message) => {
+    if (message.trim() == '') return true;
+    else return false;
+};
+
+const validateMessageData = (data) => {
+    let errors = {};
+  
+    if (isNotPhoneNumber(data.phoneNumber)) errors.phoneNumber = 'Phone number not provided';
+    if (isEmpty(data.message)) errors.message = 'Message is empty';
+  
+    return {
+      errors,
+      valid: Object.keys(errors).length === 0 ? true : false,
+    };
+};
+
+const formatWhatsappNumber = (phoneNumber) => {
+    const formattedNumber = phoneNumber.replace(/\s/g, '');
+    
+    return formattedNumber;
+};
 
 const SERVER_PORT = 8080;
 const accountSid = process.env.TWILIO_ACCOUNT_SID ? process.env.TWILIO_ACCOUNT_SID : fs.readFileSync('/etc/secrets/twilio/sid', "utf8");
