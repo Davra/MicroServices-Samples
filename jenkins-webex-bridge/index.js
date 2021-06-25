@@ -12,7 +12,7 @@ const app = express();
 var bearerToken = 'XXXXXXXX';
 var baseUrl = 'https://api.ciscospark.com/v1/messages';
 
-// GET YOUR ROOM ID from: https://developer.webex.com/endpoint-rooms-get.html
+// GET YOUR ROOM ID from: https://developer.webex.com/docs/api/v1/rooms/list-rooms
 var roomId = 'XXXXXXXXXXXXXXX';
 
 console.log('Jenkins Webex bridge has started');
@@ -34,7 +34,7 @@ app.post('/', function (req, res) {
         request.post({
             url: baseUrl,
             'auth': {
-                'bearer': 'XXXXX'
+                'bearer': bearerToken
             },
             contentType: "application/json",
             json: true,
