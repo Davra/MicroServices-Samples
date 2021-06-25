@@ -6,7 +6,7 @@ const app = express();
 app.use(express.json());
 
 // Supply an API token for uploading datapoints
-var bearerToken = 'YzhmNThhZDItMWM5ZC00ZWQ5LTlkMTgtM2VkNTM2OTljODM5MTEyZmFhZjQtZGIz_P0A1_f98b67b3-1ec1-437e-acce-3fd02f2f5d04';
+var bearerToken = 'XXXXXXXXX';
 var baseUrl = 'https://api.ciscospark.com/v1/messages';
 
 // Set the microservice running and listening for incoming HTTP requests
