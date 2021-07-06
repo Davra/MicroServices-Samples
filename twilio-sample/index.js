@@ -34,7 +34,7 @@ const formatWhatsappNumber = (phoneNumber) => {
 
 const SERVER_PORT = 8080;
 const accountSid = process.env.TWILIO_ACCOUNT_SID ? process.env.TWILIO_ACCOUNT_SID : fs.readFileSync('/etc/secrets/twilio/sid', "utf8");
-const authToken = process.env.TWILIO_AUTH_TOKEN ? process.env.TWILIO_AUTH_TOKEN : fs.readFileSync('/etc/secrets/twilio/authtoken', "utf8");
+const authToken = process.env.TWILIO_AUTH_TOKEN ? process.env.TWILIO_AUTH_TOKEN : fs.readFileSync('/etc/secrets/twilio/authToken', "utf8");
 const client = require('twilio')(accountSid, authToken);
 
 app.listen(SERVER_PORT, function () {
