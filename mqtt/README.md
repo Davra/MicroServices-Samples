@@ -21,6 +21,12 @@ curl -X PATCH 'http://{TENANT}.davra.com/api/v1/microservices/{MICROSERVICE_UUID
 Now to enable direct access to the microservice we add a TCP route with microservice port set to 1883.  
 We copy the url and port of the new route to use when setting up the client.
 
+### Authentication
+If authentication is required then we need to extend the mosquitto docker image and use a custom configuration file.
+There is a sample Dockerfile named `MosquittoConfigDockerfile` in this repository and a config file named `mosquitto.conf`.
+
+Once the microservice is deployed with the custom Dockerfile and config we need to create a (secret)[https://www.developer.davra.com/api/#secrets] with the content of the password file used on the config and mount it to the microservice at /etc/secrets/password (or the path you specified in the config file). 
+
 ## Client
 
 Create a new microservice and use the files on the `client` directory of this repo (`index.js` and `package.json`)  
