@@ -20,7 +20,7 @@
 const express = require('express');
 const app = express();
 
-app.use(express.static('public'));
+app.use(express.static('dist'));
 
 
 const SERVER_PORT = 8080;
