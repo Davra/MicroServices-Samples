@@ -105,8 +105,6 @@ export default {
     graphSpeed: null,
     selectedDevice: null,
     selectedCarLatestData: null,
-    journeyData: null,
-    selectedJourney: null,
   }),
   beforeDestroy() {
     if (this.graphSpeed) {
@@ -149,29 +147,6 @@ export default {
     async currentDate(newDate) {
       var speedData = await this.getSpeedData(newDate);
 
-      var query2 = {
-        metrics: [
-          {
-            name: "assetTracking.journey",
-            limit: 100000,
-            tags: {
-              carUUID: this.selectedDevice.UUID,
-            },
-          },
-        ],
-        start_absolute: moment(this.currentDate).startOf("day").valueOf(),
-        end_absolute: moment(this.currentDate).endOf("day").valueOf(),
-      };
-
-      this.journeyData = await platformRequest
-        .post("/api/v2/timeseriesdata", query2)
-        .then(({ data }) => {
-          return data.queries[0].results[0].values.map(([timestamp, value]) => {
-            return { date: timestamp, details: JSON.parse(value) };
-          });
-        })
-        .catch((err) => console.log(err));
-
       this.$nextTick(function () {
         this.updateGraph(speedData);
       });
@@ -180,7 +155,6 @@ export default {
   methods: {
     ...mapMutations([
       "carViewSelected",
-      "journeyViewSelected",
       "carRoutes",
       "selectedCar",
       "selectedDate",
@@ -259,14 +233,10 @@ export default {
       this.viewMode = "list";
       this.selectedDevice = null;
     },
-    viewJourneyPage(journey) {
-      this.selectedJourney = journey;
-      this.viewMode = "journey";
-    },
+
     async returnToDetailsPage() {
       this.viewMode = "details";
       this.carViewSelected(true);
-      this.journeyViewSelected(false);
       var speedData = await this.getSpeedData(this.currentDate);
       this.$nextTick(function () {
         this.updateGraph(speedData);
