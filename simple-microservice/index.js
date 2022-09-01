@@ -19,6 +19,11 @@ app.get('/davra', function (req, res) {
     console.log('Http call seen arriving at this microservice /test : ', req);
 });
 
+app.get('/hello', function (req, res) {
+    res.send('Hello World!');
+    console.log('Http call seen arriving at this microservice /hello');
+});
+
 
 // Example of making an API call to another microservice inside Connecthing
 var api = require("@connecthing.io/connecthing-api");
@@ -36,6 +41,6 @@ app.listen(SERVER_PORT, function () {
 });
 
 // Example of repeatedly writing to the logs, thus demonstrating microservice is running
-setInterval(function() {
-    console.log('microservice running. Timestamp is:' + new Date());
-}, 3000)
+//setInterval(function() {
+//    console.log('microservice running. Timestamp is:' + new Date());
+//}, 3000)
