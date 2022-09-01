@@ -14,6 +14,11 @@ app.get('/test', function (req, res) {
     console.log('Http call seen arriving at this microservice /test : ', req);
 });
 
+app.get('/davra', function (req, res) {
+    res.send('Davra node microservice here!');
+    console.log('Http call seen arriving at this microservice /test : ', req);
+});
+
 
 // Example of making an API call to another microservice inside Connecthing
 var api = require("@connecthing.io/connecthing-api");
