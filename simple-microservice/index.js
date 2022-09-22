@@ -41,6 +41,6 @@ app.listen(SERVER_PORT, function () {
 });
 
 // Example of repeatedly writing to the logs, thus demonstrating microservice is running
-setInterval(function() {
-    console.log('microservice running. Timestamp is:' + new Date());
-}, 3000)
+//setInterval(function() {
+//    console.log('microservice running. Timestamp is:' + new Date());
+//}, 3000)
