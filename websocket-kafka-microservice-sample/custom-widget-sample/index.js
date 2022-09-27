@@ -33,7 +33,7 @@ function connecthingWidgetInit(context) {
 }
  
 function initWebSocket() {
-        let socket = new WebSocket("wss://<tenant>.davra.com/microservices/<microserice name>/");
+        let socket = new WebSocket("wss://<microservice name>-<tenant>.apps.davra.com");
         socket.onopen = function(e) {
             console.log("Connection established");
         };
