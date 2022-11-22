@@ -22,7 +22,7 @@ public class Main {
         props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "true");
         props.put(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, "1000");
         props.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, "30000");
-        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.IntegerDeserializer");
+        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
         
         String storePassword = "";
@@ -37,11 +37,29 @@ public class Main {
         props.put(SslConfigs.SSL_KEY_PASSWORD_CONFIG, storePassword);
         props.put(SslConfigs.SSL_ENDPOINT_IDENTIFICATION_ALGORITHM_CONFIG , "");
  
-        KafkaConsumer<Integer, String> consumer = new KafkaConsumer<>(props);
+        KafkaConsumer<String, String> consumer = new KafkaConsumer<String, String>(props);
         consumer.subscribe(Collections.singletonList(System.getenv("IoT_DATA_TOPIC_NAME")));
-        ConsumerRecords<Integer, String> records = consumer.poll(1000);
-        for (ConsumerRecord<Integer, String> record : records) {
-            System.out.println("Received message: (" + record.key() + ", " + record.value() + ") at offset " + record.offset());
+        
+        final int giveUp = 100;
+        int noRecordsCount = 0;
+        
+        while (true) {
+            final ConsumerRecords<String, String> consumerRecords = consumer.poll(1000);
+            System.out.println("Received messages " + consumerRecords.count());
+            if (consumerRecords.count()==0) {
+                noRecordsCount++;
+                if (noRecordsCount > giveUp) break;
+                else continue;
+            }
+
+            consumerRecords.forEach(record -> {
+                System.out.printf("Consumer Record:(%s, %s, %d, %d)\n",
+                        record.key(), record.value(),
+                        record.partition(), record.offset());
+            });
+
+            consumer.commitAsync();
         }
+        consumer.close();
     }
 }
