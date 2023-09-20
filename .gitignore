@@ -2,3 +2,5 @@
 vue-sample-app/.env
 
 .idea/
+
+node_modules
