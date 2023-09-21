@@ -1,0 +1,16 @@
+{
+  "name": "microservice",
+  "version": "1.0.0",
+  "description": "connecthing.io microservice",
+  "main": "index.js",
+  "scripts": {
+    "start": "sh start.sh",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "connecthing.io",
+  "license": "ISC",
+  "dependencies": {
+    "@connecthing.io/connecthing-api": "~1.0.2",
+    "node-rdkafka": "2.11.0"
+  }
+}
