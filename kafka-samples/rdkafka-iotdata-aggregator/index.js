@@ -11,6 +11,33 @@ const config = {
 aggregator.init(config);
 
 let consumer;
+let partitionAssignmentInterval;
+
+function kafkaErrorHandler (err, exitOnFatal = false) {
+    let handledError = false;
+
+    console.error('Error reported from kafka %O', err);
+    const message = (err.message || '').toLowerCase();
+    const reconnectionMessages = [
+        'all broker connections are down',
+        'authorization'
+    ];
+    if (reconnectionMessages.find(m => message.includes(m))) {
+        consumer.disconnect(() => {
+            console.log('Consumer disconnected');
+            connectConsumer();
+        });
+        handledError = true;
+    } else if (message.indexOf('timeout') < 0) {
+        if (exitOnFatal) {
+            handledError = true;
+            console.error('This looks fatal, exiting');
+            process.exit(1);
+        }
+    }
+
+    return handledError;
+}
 
 function createConsumer () {
     consumer = new Kafka.KafkaConsumer({
@@ -30,7 +57,10 @@ function createConsumer () {
         consumer.subscribe([process.env.IoT_DATA_TOPIC_NAME]);
     
         // poll consumer to ensure at least one partition of the topic is assigned to it
-        setInterval(() => {
+        if (partitionAssignmentInterval) {
+            clearInterval(partitionAssignmentInterval);
+        }
+        partitionAssignmentInterval = setInterval(() => {
             const assignments = consumer.assignments();
             if (!assignments || assignments.length === 0) {
                 console.log('No partitions assigned to this consumer, resubscribing');
@@ -40,13 +70,7 @@ function createConsumer () {
     
         consume();
     })
-    .on('event.error', (err) => {
-        console.error('Error reported from kafka %O', err);
-        if (err.message && err.message.toLowerCase().indexOf('timeout') < 0) {
-            console.error('This looks fatal, exiting');
-            process.exit(1);
-        }
-    });
+    .on('event.error', kafkaErrorHandler);
     
     process.on('exit', () => {
         console.log('Process exiting disconnecting consumer');
@@ -59,9 +83,13 @@ function createConsumer () {
     });
 }
 
+let connectionInProgress = false;
 function connectConsumer () {
     console.log('Attempting to connect to kafka');
+    if (connectionInProgress) return;
+    connectionInProgress = true;
     consumer.connect({ timeout: 10000 }, (err) => {
+        connectionInProgress = false;
         if (err) {
             console.log('\n\n\n\n##########################################\n\n\n\n\nFailed to connect to Kafka!\n\n\n\n##########################################', err);
             setTimeout(connectConsumer, 1000);
@@ -76,7 +104,9 @@ function consume () {
     consumer.consume(batchSize, async (err, messages) => {
         if (err) {
             console.error('Error returned from consume call', err);
-            setImmediate(consume);
+            if (!kafkaErrorHandler(err)) {
+                setImmediate(consume);
+            }
             return;
         }
 
