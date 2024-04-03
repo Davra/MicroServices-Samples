@@ -35,6 +35,11 @@ app.post('/', (req, res) => {
   res.send('The twin MS received your post request')
 });
 
+
+app.put('/', (req, res) => {
+  res.send('The twin MS received your put request')
+});
+
 app.listen(SERVER_PORT, function () {
   console.log('davra.com node microservice listening on port ' + SERVER_PORT + '!');
 });

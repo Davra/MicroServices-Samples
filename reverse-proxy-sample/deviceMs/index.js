@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
     res.send('Hello World from Device MS');
 });
 
-app.get('/list', (req, res) => {
+app.get('/list', async (req, res) => {
     try {
         const request = await axios.get("http://api.connecthing/api/v1/devices?limit=10&start=0", {
             headers: {
@@ -31,6 +31,10 @@ app.get('/list', (req, res) => {
 });
 app.post('/', (req, res) => {
     res.send('The device MS received your post request')
+});
+
+app.put('/', (req, res) => {
+    res.send('The device MS received your put request')
 });
 
 app.listen(SERVER_PORT, function () {
