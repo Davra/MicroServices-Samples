@@ -2,7 +2,7 @@ FROM openjdk:11.0.13-jdk
 
 COPY . /microservice
 
-RUN curl -f -O -L https://s3.amazonaws.com/downloads.davra.com/apache-maven-3.8.4-bin.tar.gz 
+RUN curl -f -O -L https://downloads.davra.com/apache-maven-3.8.4-bin.tar.gz 
 
 RUN tar -zxf apache-maven-3.8.4-bin.tar.gz -C /opt
 
