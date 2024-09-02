@@ -2,7 +2,8 @@ const mqtt = require('mqtt');
 
 const api = require('@connecthing.io/connecthing-api');
 
-const MQTT_BROKER = 'mqtt.test2.davra.com:8883';
+const TENANT_ID = ''; //set this to your tenant ID
+const MQTT_BROKER = `mqtt.${TENANT_ID}.davra.com:8883`;
 const password = fs.readFileSync('/etc/connecthing-api/token','utf8');
 const client  = mqtt.connect('mqtts://' + MQTT_BROKER, {
     username: '38131ef2-f8a4-4982-ab13-e71f82066b21', // Set this to your service UUID
