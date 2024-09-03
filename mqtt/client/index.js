@@ -1,9 +1,16 @@
 const mqtt = require('mqtt');
 
-const MQTT_BROKER = '54.154.232.195:32282';
-const client  = mqtt.connect('mqtt://' + MQTT_BROKER);
+const api = require('@connecthing.io/connecthing-api');
 
-const TOPIC_NAME = 'testTopic';
+const TENANT_ID = ''; //set this to your tenant ID
+const MQTT_BROKER = `mqtt.${TENANT_ID}.davra.com:8883`;
+const password = fs.readFileSync('/etc/connecthing-api/token','utf8');
+const client  = mqtt.connect('mqtts://' + MQTT_BROKER, {
+    username: '38131ef2-f8a4-4982-ab13-e71f82066b21', // Set this to your service UUID
+    password
+});
+
+const TOPIC_NAME = 'device/+/data';
  
 client.on('connect', () => {
   console.log('MQTT client connected');
@@ -20,4 +27,17 @@ client.on('connect', () => {
 client.on('message', (topic, message) => {
   console.log('New message on topic: ' + topic);
   console.log('Message: ' + message.toString());
+  const [,deviceUuid] = topic.split('/');
+  const dataToSend = {
+    UUID: deviceUuid,
+    name: 'com.davra.test',
+    value: message,
+    msg_type: 'datum'
+  }
+  api.request({
+    url: 'http://api.connecthing/api/v1/iotdata',
+    contentType: 'application/json',
+    body: JSON.stringify(dataToSend),
+    method: 'PUT'
+  });
 });
