@@ -4,6 +4,7 @@ const fs = require("fs");
 const app = express();
 const api = require("@connecthing.io/connecthing-api"); // Required for local API calls
 const METRIC_TO_WATCH = "43040_100";
+const API_HOST = 'https://YOUR_TENANT_HOST';
 
 app.get('/', function (req, res) {
     res.send('Davra node microservice!');
@@ -46,7 +47,7 @@ var simplePutDataIntoTimeSeriesDb = function(deviceUuid, metricValue, callback) 
         "msg_type": "event"
     }
     api.request({
-        url: "http://api.connecthing/api/v1/iotdata",
+        url: API_HOST+"/api/v1/iotdata",
         contentType: "application/json",
         body: JSON.stringify(dataToSend),
         method: "PUT",

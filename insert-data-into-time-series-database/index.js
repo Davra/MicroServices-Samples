@@ -5,6 +5,7 @@ const api = require("@connecthing.io/connecthing-api"); // Required for local AP
 const request = require('request');
 const http = require("http");
 const https = require("https");
+const API_HOST = 'https://YOUR_TENANT_HOST';
 
 // An example of microservice responding to incoming HTTP requests (GET)
 // You can test this by clicking the "Send" button on your far right of the code editor
@@ -25,7 +26,7 @@ var simplePutDataIntoTimeSeriesDb = function(deviceUuid, metricName, metricValue
         "msg_type": "datum"
     }
     api.request({
-        url: "http://api.connecthing/api/v1/iotdata",
+        url: API_HOST+"/api/v1/iotdata",
         contentType: "application/json",
         body: JSON.stringify(dataToSend),
         method: "PUT",

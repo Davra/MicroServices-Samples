@@ -3,6 +3,7 @@
 const keyPublishable = 'pk_test_XXXXX'; // Enter the key here
 const keySecret = 'sk_test_XXXXX'; // enter the secret here
 const davraToken = 'XXXXX';
+const API_HOST = 'https://YOUR_TENANT_HOST';
 
 
 const request = require('request');
@@ -172,7 +173,7 @@ app.get('/updateCustomerQuantities', function (req, res) {
     
 var updateCustomerQuantities = function(callback) {
     request({
-        url: "http://api.connecthing/api/v1/devices",
+        url: API_HOST+"/api/v1/devices",
         contentType: "application/json",
         headers: {
             "Authorization": "Bearer " + davraToken
@@ -354,7 +355,7 @@ app.post("/changeSubscription", function(req, res) {
 
 // Leave this at the end
 request({
-    url: "http://api.connecthing/api/v1/devices",
+    url: API_HOST+"/api/v1/devices",
     contentType: "application/json",
     headers: {
         "Authorization": "Bearer " + davraToken

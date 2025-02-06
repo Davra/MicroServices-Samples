@@ -1,5 +1,6 @@
 const coap = require('coap');
 const api = require('@connecthing.io/connecthing-api');
+const API_HOST = 'https://YOUR_TENANT_HOST';
 
 function saveTimeSeriesData(UUID, metricName, metricValue) {
     var dataToSend = {
@@ -9,7 +10,7 @@ function saveTimeSeriesData(UUID, metricName, metricValue) {
         'msg_type': 'datum'
     }
     api.request({
-        url: 'http://api.connecthing/api/v1/iotdata',
+        url: API_HOST+'api/v1/iotdata',
         contentType: 'application/json',
         body: JSON.stringify(dataToSend),
         method: 'PUT',

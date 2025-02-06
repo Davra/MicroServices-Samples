@@ -4,19 +4,19 @@ const kafka = require('kafka-node');
 const fs = require("fs");
 const app = express();
 
-const aggregator = require("./aggregator.js");
+// const aggregator = require("./aggregator.js");
 
 
 
-var config = {
-    DEBUG: false,
-    redis: {
-        host: "redis.default",
-        port: 6379
-    },
-    bucket_size: 60 * 60 * 1000,
-    bucket_ttl: 24 * 60 * 60 * 1000
-};
+// var config = {
+//     DEBUG: false,
+//     redis: {
+//         host: "redis.default",
+//         port: 6379
+//     },
+//     bucket_size: 60 * 60 * 1000,
+//     bucket_ttl: 24 * 60 * 60 * 1000
+// };
 
 
 app.get('/', function (req, res) {
@@ -28,7 +28,7 @@ app.listen(SERVER_PORT, function () {
     console.log('Davra node microservice listening on port ' + SERVER_PORT + '!');
 });
 
-aggregator.init(config);
+// aggregator.init(config);
 
 
 const ConsumerGroup = kafka.ConsumerGroup;
@@ -44,11 +44,11 @@ const consumer = new ConsumerGroup({
         rejectUnauthorized: false
     } 
   },
-  [ process.env.IoT_DATA_TOPIC_NAME ]);
+  [ 'ruban.twin-updates' ]);
 
 consumer.on("message", function(message){
     //console.log("Message: %o", message);
-    aggregator.processMessage(message);
+    // aggregator.processMessage(message);
 });
 
 
@@ -59,7 +59,7 @@ consumer.on("error", function(err){
 
 
 /*Instruct all aggregators to flush to iotdata*/
-setInterval(function(){
-    aggregator.writeToStore().catch((err) => {console.error("Error writing to iotdata", err);});
-}, 2500);
+// setInterval(function(){
+//     aggregator.writeToStore().catch((err) => {console.error("Error writing to iotdata", err);});
+// }, 2500);
 

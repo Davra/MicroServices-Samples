@@ -5,6 +5,7 @@ const axios = require('axios')
 const fs = require('fs')
 // Constants
 const SERVER_PORT = 8080;
+const API_HOST = 'https://YOUR_TENANT_HOST';
 
 const token = fs.readFileSync('/etc/connecthing-api/token')
 // App
@@ -17,7 +18,7 @@ app.get('/', (req, res) => {
 app.get('/list', async (req, res) => {
 
   try {
-    const request = await axios.get("http://api.connecthing/api/v1/twins?limit=10&start=0", {
+    const request = await axios.get(API_HOST+"/api/v1/twins?limit=10&start=0", {
       headers: {
         'Authorization': 'Bearer ' + token
       }

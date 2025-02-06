@@ -14,6 +14,8 @@ const request = require('request');
 const http = require("http");
 const https = require("https");
 
+const API_HOST = 'https://YOUR_TENANT_HOST';
+
 // An example of microservice responding to incoming HTTP requests (GET)
 // You can test this by clicking the "Send" button on your far right of the code editor
 app.get('/', function (req, res) {
@@ -32,7 +34,7 @@ setInterval(function() {
     console.log('microservice running. Timestamp is:' + new Date());
     // Example of making an API call to another microservice inside Connecthing
     api.request({
-        url: "http://api.connecthing/api/v1/devices",
+        url: API_HOST+"/api/v1/devices",
         callback: function(err, response, body){
             console.log('Http call was made to /api/v1/devices and got back: ', body);
         }
@@ -113,7 +115,7 @@ app.get('/localdata', function (req, res) {
         }
     }
     api.request({
-        url: "http://api.connecthing/api/v1/timeseriesData",
+        url: API_HOST+"/api/v1/timeseriesData",
         contentType: "application/json",
         headers: {
           'Content-Type': 'application/json'

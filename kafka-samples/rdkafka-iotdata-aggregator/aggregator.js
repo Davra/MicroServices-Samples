@@ -3,7 +3,7 @@
 const util = require("util");
 const request = require("request");
 var api = require("@connecthing.io/connecthing-api");
-
+const API_HOST = 'https://YOUR_TENANT_HOST';
 
 var config = {
     DEBUG: false,
@@ -155,7 +155,7 @@ function uploadAggDataToIoTData(data){
         console.log("Uploading %s", JSON.stringify(data));
         
         api.request({
-            url: "http://api.connecthing/api/v1/iotdata", 
+            url: API_HOST+"/api/v1/iotdata", 
             method: "PUT",
             body: JSON.stringify(data)
         }, (err, res, body) => {
