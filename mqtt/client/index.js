@@ -3,7 +3,7 @@ const mqtt = require('mqtt');
 const api = require('@connecthing.io/connecthing-api');
 
 const TENANT_ID = ''; //set this to your tenant ID
-const API_HOST = 'https://YOUR_TENANT_HOST';
+const API_HOST = process.env.DAVRA_API_HOST
 const MQTT_BROKER = `mqtt.${TENANT_ID}.davra.com:8883`;
 const password = fs.readFileSync('/etc/connecthing-api/token','utf8');
 const client  = mqtt.connect('mqtts://' + MQTT_BROKER, {

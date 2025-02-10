@@ -1,6 +1,6 @@
 const coap = require('coap');
 const api = require('@connecthing.io/connecthing-api');
-const API_HOST = 'https://YOUR_TENANT_HOST';
+const API_HOST = process.env.DAVRA_API_HOST
 
 function saveTimeSeriesData(UUID, metricName, metricValue) {
     var dataToSend = {

@@ -4,7 +4,7 @@ const fs = require("fs");
 const app = express();
 const api = require("@connecthing.io/connecthing-api"); // Required for local API calls
 const METRIC_TO_WATCH = "43040_100";
-const API_HOST = 'https://YOUR_TENANT_HOST';
+const API_HOST = process.env.DAVRA_API_HOST
 
 app.get('/', function (req, res) {
     res.send('Davra node microservice!');

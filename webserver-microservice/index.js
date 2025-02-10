@@ -14,7 +14,7 @@ const request = require('request');
 const http = require("http");
 const https = require("https");
 
-const API_HOST = 'https://YOUR_TENANT_HOST';
+const API_HOST = process.env.DAVRA_API_HOST
 
 // An example of microservice responding to incoming HTTP requests (GET)
 // You can test this by clicking the "Send" button on your far right of the code editor

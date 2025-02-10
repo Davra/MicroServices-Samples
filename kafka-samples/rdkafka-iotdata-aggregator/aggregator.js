@@ -3,7 +3,7 @@
 const util = require("util");
 const request = require("request");
 var api = require("@connecthing.io/connecthing-api");
-const API_HOST = 'https://YOUR_TENANT_HOST';
+const API_HOST = process.env.DAVRA_API_HOST
 
 var config = {
     DEBUG: false,

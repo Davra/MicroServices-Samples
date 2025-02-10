@@ -5,7 +5,7 @@ const axios = require('axios')
 const fs = require('fs')
 // Constants
 const SERVER_PORT = 8080;
-const API_HOST = 'https://YOUR_TENANT_HOST';
+const API_HOST = process.env.DAVRA_API_HOST
 
 const token = fs.readFileSync('/etc/connecthing-api/token')
 // App

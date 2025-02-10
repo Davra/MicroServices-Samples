@@ -3,7 +3,7 @@
 const keyPublishable = 'pk_test_XXXXX'; // Enter the key here
 const keySecret = 'sk_test_XXXXX'; // enter the secret here
 const davraToken = 'XXXXX';
-const API_HOST = 'https://YOUR_TENANT_HOST';
+const API_HOST = process.env.DAVRA_API_HOST
 
 
 const request = require('request');
