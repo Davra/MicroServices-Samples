@@ -65,24 +65,56 @@ setInterval(() => {
 }, THROTTLE_INTERVAL);
 
 async function run() {
-    const consumer = kafka.consumer({ groupId: consumerGroup });
-    await consumer.connect();
-    for (const topic of topics) {
-        await consumer.subscribe({ topic, fromBeginning: false }).catch(err => {
-            console.error(`Failed to subscribe to topic ${topic}:`, err);
+    let consumer;
+    let reconnectAttempts = 0;
+    const maxReconnectAttempts = 20;
+    const reconnectDelay = 5000; // ms
+
+    async function startConsumer() {
+        try {
+            consumer = kafka.consumer({ groupId: consumerGroup });
+            await consumer.connect();
+            for (const topic of topics) {
+                await consumer.subscribe({ topic, fromBeginning: false }).catch(err => {
+                    console.error(`Failed to subscribe to topic ${topic}:`, err);
+                });
+            }
+            await consumer.run({
+                eachMessage: async ({ topic, partition, message }) => {
+                    const value = message.value.toString();
+                    const payload = { topic, value, partition, timestamp: message.timestamp };
+                    messageBuffer.push(payload);
+                    console.log(`Received message from topic ${topic}:`, payload);
+                }
+            });
+            reconnectAttempts = 0;
+            console.log('Kafka consumer is running and forwarding messages to WebSocket clients...');
+        } catch (err) {
+            console.error('Kafka consumer error:', err);
+            await handleReconnect();
+        }
+
+        consumer.on('crash', async (event) => {
+            console.error('Kafka consumer crashed:', event.error);
+            await handleReconnect();
+        });
+        consumer.on('disconnect', async () => {
+            console.warn('Kafka consumer disconnected');
+            await handleReconnect();
         });
     }
-    await consumer.run({
-        eachMessage: async ({ topic, partition, message }) => {
-            const value = message.value.toString();
-            const payload = { topic, value, partition, timestamp: message.timestamp };
-            // Push to buffer instead of sending immediately
-            messageBuffer.push(payload);
-            console.log(`Received message from topic ${topic}:`, payload);
 
+    async function handleReconnect() {
+        reconnectAttempts++;
+        if (reconnectAttempts > maxReconnectAttempts) {
+            console.error('Max Kafka reconnect attempts reached. Exiting.');
+            process.exit(1);
         }
-    });
-    console.log('Kafka consumer is running and forwarding messages to WebSocket clients...');
+        console.log(`Reconnecting to Kafka in ${reconnectDelay / 1000}s... (Attempt ${reconnectAttempts})`);
+        setTimeout(() => startConsumer(), reconnectDelay);
+    }
+
+    await startConsumer();
 }
 
 run().catch(console.error);
