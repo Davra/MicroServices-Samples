@@ -19,7 +19,7 @@ app.get('/', function (req, res) {
     console.log('Http call seen arriving at this microservice');
 });
 
-/* An example of an api call being exposed by a custom microservice whi */
+/* An example of an api call being exposed by a custom microservice which in turn makes a call to the Davra platform*/
 app.get('/davra', async function (req, res) {
     try {
         const opts = {
