@@ -1,17 +1,16 @@
 {
     "name": "microservice",
     "version": "1.0.0",
-    "description": "connecthing.io microservice",
+    "description": "A sample microservice to run on the Davra Platform",
     "main": "index.js",
     "scripts": {
-      "start": "sh start.sh",
-      "test": "echo \"Error: no test specified\" && exit 1"
+        "start": "sh start.sh",
+        "test": "echo \"Error: no test specified\" && exit 1"
     },
-    "author": "connecthing.io",
+    "author": "davra.com",
     "license": "ISC",
     "dependencies": {
-      "express": "^4.15.4",
-      "@connecthing.io/connecthing-api": "~1.0.2"
+        "axios": "^1.9.0",
+        "express": "^4.15.4"
     }
-  }
-  
+}
