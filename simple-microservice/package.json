@@ -4,7 +4,7 @@
     "description": "A sample microservice to run on the Davra Platform",
     "main": "index.js",
     "scripts": {
-        "start": "sh start.sh",
+        "start": "node index.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "davra.com",
